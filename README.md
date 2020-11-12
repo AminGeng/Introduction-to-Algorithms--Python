@@ -1,5 +1,5 @@
 # Introduction-to-Algorithms--Python
-个人用Python基本完成了《算法导论》前六章教材部分，欢迎志同道合之士批评指正，一起探讨学习
+个人用Python基本完成了《算法导论》前六章教材内容，欢迎志同道合之士批评指正，一起探讨学习
 
 ## Sort: 7种排序算法
     冒泡排序: BubbleSort.py
