@@ -27,7 +27,7 @@
             MinHeap.py: 最小堆
             DisjointSet.py: 不相交集合森林
         Prim.py: Prim算法, 采用斐波那契堆来选取一条新的边
-            FibonacciHeap.py: 斐波那契堆的基本操作, 时间问题还没有实现斐波那契对的绘制
+            FibonacciHeap.py: 斐波那契堆的基本操作, 由于时间原因, 目前笔者还没有简单实现斐波那契堆的绘制
             Example_FibonacciHeap.py: 斐波那契堆的简单示例
         Example_MinimunSpanningTree.py: 最小生成树的简单示例
     单源最短路径:
