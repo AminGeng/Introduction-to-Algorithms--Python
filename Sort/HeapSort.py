@@ -1,43 +1,61 @@
+# 堆排序
+# 时间复杂度O(NlgN), 原址排序, 不稳定.
+# 直接将列表排成最大堆, 即满足: list(i)>list(i*2+1)(i位置元素的左孩子), list(i)>list(i*2+2)(i位置元素的右孩子)
 import random
+
 
 # def parent(i):
 #     return (i + 1) // 2 - 1
 
 
-def left(i):
-    return (i + 1) * 2 - 1
+# 列表中index_i位置处的元素的左孩子的位置
+def left(index_i):
+    return (index_i + 1) * 2 - 1
 
 
-def right(i):
-    return (i + 1) * 2
+# 列表中index_i位置处的元素的右孩子的位置
+def right(index_i):
+    return (index_i + 1) * 2
 
 
-def max_heapify(list_a, i, j):
-    max_index = i
-    if left(i) <= j and list_a[left(i)] > list_a[i]:
-        max_index = left(i)
-    if right(i) <= j and list_a[right(i)] > list_a[max_index]:
-        max_index = right(i)
-    if max_index != i:
-        list_a[max_index], list_a[i] = list_a[i], list_a[max_index]
-        max_heapify(list_a, max_index, j)
+# 维持列表从位置index_i到index_j的堆性质
+# 运行的前提条件: 列表从位置index_i+1到index_j满足最大堆性质
+def max_heapify(list_a, index_i, index_j):
+    # 在list_a中的index_i, left(index_i), right(index_i)三个位置找出元素的值最大的那个
+    index_max = index_i
+    if left(index_i) <= index_j and list_a[left(index_i)] > list_a[index_i]:
+        index_max = left(index_i)
+    if right(index_i) <= index_j and list_a[right(index_i)] > list_a[index_max]:
+        index_max = right(index_i)
+    # 如果值最大的在index_i处, 堆性质不需要维护
+    # 否则将最大元素交换到index_i处, 并继续, 从最大元素所在原始位置开始运行max_heapify操作, 维持从从位置index_man到index_j的堆性质
+    if index_max != index_i:
+        list_a[index_max], list_a[index_i] = list_a[index_i], list_a[index_max]
+        max_heapify(list_a, index_max, index_j)
 
 
+# 将list_a建成一个最大堆
+# 最大堆的内部结点有len(list)//2个, 所以直接从len(list_a)//2-1处开始运行max_heapify, 维持从该位置到列表最后的堆性质, 依此降序到0
 def build_max_heap(list_a):
-    for i in range(len(list_a) // 2, -1, -1):
-        max_heapify(list_a, i, len(list_a) - 1)
+    for index_i in range(len(list_a) // 2 - 1, -1, -1):
+        max_heapify(list_a, index_i, len(list_a) - 1)
 
 
+# 堆排序主体
+# 首次运行build_max_heap建立最大堆, 将列首最大元素与列尾元素交换
+# 之后每次运行max_heapify, 维持从列首到列尾未交换过的元素位置的最大堆性质
 def heap_sort(list_a):
     build_max_heap(list_a)
-    for i in range(len(list_a) - 1, 0, -1):
-        list_a[i], list_a[0] = list_a[0], list_a[i]
-        max_heapify(list_a, 0, i - 1)  # 注意只能从最后删除元素才不会影响堆, 不能直接删除第一个, 那就可能不再是堆了.
+    for index_i in range(len(list_a) - 1, 0, -1):
+        list_a[index_i], list_a[0] = list_a[0], list_a[index_i]
+        max_heapify(list_a, 0, index_i - 1)
 
 
-A = [random.randint(1, 10) for _ in range(7)]
-print(len(A))
-build_max_heap(A)
-print(A)
-heap_sort(A)
-print(A)
+# 测试部分
+# 与系统方法sorted()的结果进行比对
+for i in range(1000):
+    A = [random.randint(1, 100) for _ in range(random.randint(1, 2000))]
+    B = sorted(A)
+    heap_sort(A)
+    if A != B:
+        print('error')
