@@ -3,7 +3,13 @@
 # 摊还分析势函数是t(h)+2m(h): t(h): h的根结点数目; m(h): h中mark==True的结点的数目.
 # 建堆, 插入, 查找最小值, 合并堆, 减值的摊还代价为O(1)
 # 抽取最小值, 删除的摊还代价为O(lgn)
+
+
+# 斐波那契堆所需要的的结点
 class NodeFib(object):
+    # key:结点名称, value:结点值, child:结点的孩子(结点有双向孩子链, child只指向孩子链中一个), parent:双亲
+    # mark:标记(减值操作时进行更改), degree:度数(它的孩子数), left:左结点, right:右节点(因为是双向链表的结点)
+    # par: 为了在Prim算法中引起结点减值操作的顶点, 不是斐波那契堆操作中需要的属性.
     __slots__ = ('key', 'value', 'child', 'parent', 'mark', 'degree', 'par', 'left', 'right')
 
     def __init__(self, *, key, value=float('inf')):
@@ -17,6 +23,8 @@ class NodeFib(object):
 
 
 class FibonacciHeap(object):
+    # self.min指向value最小的根结点, 也是所有结点中value最小的
+    # self.number记录堆中的结点数
     def __init__(self):
         self.min = None
         self.number = 0
