@@ -1,7 +1,10 @@
 # 堆排序
-# 时间复杂度O(NlgN), 原址排序, 不稳定.
-# 直接将列表排成最大堆, 即满足: list(i)>list(i*2+1)(i位置元素的左孩子), list(i)>list(i*2+2)(i位置元素的右孩子)
+# 原理: 通过build_max_heap方法将列表排成最大堆, 即满足: list(i)>list(i*2+1)(i位置元素左孩子), list(i)>list(i*2+2)(i位置元素右孩子)
+# 原理续: 进入循环, 第i此交换倒数第i为与第一位, 使第i大的元素排在倒数第i位, 然后运行max_heapify方法, 保持前N-i个元素的堆性质
+# 不稳定, 原址排序
+# 时间复杂度O(NlgN)
 import random
+import time
 
 
 # def parent(i):
@@ -19,7 +22,7 @@ def right(index_i):
 
 
 # 维持列表从位置index_i到index_j的堆性质
-# 运行的前提条件: 列表从位置index_i+1到index_j满足最大堆性质
+# 运行前提条件: 列表从位置index_i+1到index_j满足最大堆性质
 def max_heapify(list_a, index_i, index_j):
     # 在list_a中的index_i, left(index_i), right(index_i)三个位置找出元素的值最大的那个
     index_max = index_i
@@ -53,9 +56,12 @@ def heap_sort(list_a):
 
 # 测试部分
 # 与系统方法sorted()的结果进行比对
+# 测试用时: 10.619423866271973, 倒数第三
+start = time.time()
 for i in range(1000):
     A = [random.randint(1, 100) for _ in range(random.randint(1, 2000))]
     B = sorted(A)
     heap_sort(A)
     if A != B:
         print('error')
+print(time.time() - start)
