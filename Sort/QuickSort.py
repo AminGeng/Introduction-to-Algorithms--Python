@@ -28,21 +28,12 @@ def find_position(list_b, index_i, index_j):
 
 
 # 递归: 每次调用find_position方法, 检索处理列表为左右两侧, 再对左右侧进行同样操作
-def quick_sort(list_a, index_x, index_y):
+def quick_sort_(list_a, index_x, index_y):
     if index_x < index_y:
         divide = find_position(list_a, index_x, index_y)
-        quick_sort(list_a, index_x, divide - 1)
-        quick_sort(list_a, divide + 1, index_y)
+        quick_sort_(list_a, index_x, divide - 1)
+        quick_sort_(list_a, divide + 1, index_y)
 
 
-# 测试部分
-# 与系统方法sorted()的结果进行比对
-# 测试用时: 3.907013416290283, 很快, 仅次于线性排序,
-start = time.time()
-for i in range(1000):
-    A = [random.randint(1, 100) for _ in range(random.randint(1, 2000))]
-    B = sorted(A)
-    quick_sort(A, 0, len(A) - 1)
-    if A != B:
-        print('error')
-print(time.time() - start)
+def quick_sort(list_a):
+    quick_sort_(list_a, 0, len(list_a)-1)

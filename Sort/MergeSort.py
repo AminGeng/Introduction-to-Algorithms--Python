@@ -30,26 +30,16 @@ def merge(list_x, index_head1, index_head2, index_tail):
 
 
 # 归并排序list_x[index_head: index_tail+1]
-def merge_sort(list_x, index_head, index_tail):
+def merge_sort_(list_x, index_head, index_tail):
     # 归并启动条件 list_x[index_head: index_tail+1]中的元素个数>1: 元素个数=index_tail-index_head+1
     if index_tail - index_head > 0:
         # 精髓所在
         # 二分列表为两个子列, 分别排好序, 然后运行merge方法, 归并排好序的两部分列表
         # 子列表排序也采用二路归并策略, 所以用到递归
         index_m = (index_head + index_tail) // 2
-        merge_sort(list_x, index_head, index_m)
-        merge_sort(list_x, index_m + 1, index_tail)
+        merge_sort_(list_x, index_head, index_m)
+        merge_sort_(list_x, index_m + 1, index_tail)
         merge(list_x, index_head, index_m + 1, index_tail)
 
-
-# 测试部分
-# 与系统方法sorted()的结果进行比对
-# 测试用时: 4.455240488052368, 快
-start = time.time()
-for i in range(1000):
-    A = [random.randint(1, 100) for _ in range(random.randint(1, 2000))]
-    B = sorted(A)
-    merge_sort(A, 0, len(A) - 1)
-    if A != B:
-        print('error')
-print(time.time() - start)
+def merge_sort(list_x):
+    merge_sort_(list_x, 0 , len(list_x)-1)
