@@ -41,6 +41,7 @@ def test_inplace(sort_func):
                 raise ValueError(f"List {i} is not sorted correctly")
         except Exception as e:
             print(e)
+    print("|   | list len| average time|\n| - | ------- | ----------- |")
     for i in range(6):
         total_time = 0
         for j in range(testList_listNum_list[i]):
@@ -54,7 +55,7 @@ def test_inplace(sort_func):
             except Exception as e:
                 print(e)
         average_time = total_time * 1000 / testList_listNum_list[i]
-        print("list len {:7d}, average time: {:20.3f} ms".format(10**(i+1), average_time))
+        print("| {:1d} |{:9d}|{:10.3f} ms|".format(i+1, 10**(i+1), average_time))
         if average_time > 1000:
             break
         
