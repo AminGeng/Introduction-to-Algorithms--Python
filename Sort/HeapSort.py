@@ -4,17 +4,9 @@
 空间复杂度: O(1)
 时间复杂度: O(NlgN)
 原理:
-    通过build_max_heap方法将列表排成最大堆, 即满足: list(i)>list(i*2+1)(i位置元素左孩子), list(i)>list(i*2+2)(i位置元素右孩子)
+    通过build_max_heap方法将列表排成最大堆, 即满足: list(i)>=list(i*2+1)(i位置元素左孩子), list(i)>=list(i*2+2)(i位置元素右孩子)
     进入循环, 第i次交换倒数第i位与第一位, 使第i大的元素排在倒数第i位, 然后运行max_heapify方法, 保持前N-i个元素的堆性质
 """
-import random
-import time
-
-
-# def parent(i):
-#     return (i + 1) // 2 - 1
-
-
 # 列表中index_i位置处的元素的左孩子的位置
 def left(index_i):
     return (index_i + 1) * 2 - 1
