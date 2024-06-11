@@ -54,6 +54,9 @@
     | 6 |1000000  |  3891.938 ms|
 
 - 归并排序: [MergeSort.py](Sort/MergeSort.py)
+    - 稳定
+    - 空间复杂度: N
+    - 时间复杂度: NlgN
 
     |   |list len | average time|
     | - | ------- | ----------- |
@@ -65,6 +68,9 @@
     | 6 |1000000  |  1080.527 ms|
 
 - 快速排序: [QuickSort.py](Sort/QuickSort.py)
+    - 不稳定
+    - 空间复杂度: O(1)
+    - 时间复杂度: 最好O(NlgN), 最坏O(N^2), 平均O(NLgN)
 
     |   |list len | average time|
     | - | ------- | ----------- |
@@ -77,8 +83,33 @@
     *list len 1000000, maximum recursion depth exceeded*
 
 - 计数排序: [CountingSort.py](Sort/CountingSort.py)
+    - 稳定 
+    - 空间复杂度: O(K+N): 假设所有元素为整数且在区间[x, x+K)
+    - 时间复杂度: O(K+N)
+
+    |   | list len| average time|
+    | - | ------- | ----------- |
+    | 1 |       10|     0.019 ms|
+    | 2 |      100|     0.029 ms|
+    | 3 |     1000|     0.127 ms|
+    | 4 |    10000|     1.084 ms|
+    | 5 |   100000|    11.123 ms|
+    | 6 |  1000000|   145.962 ms|
 
 - 基数排序: [RadixSort.py](Sort/RadixSort.py)
+    - 稳定
+    - 空间复杂度: O(N)
+    - 时间复杂度: O(D(N+R)): D是整数的位数, N:列表元素总数, R:每一位的数字数, 十进制就是0~9共10个
+    - 核心: 取位运算+CountingSort
+
+    |   | list len| average time|
+    | - | ------- | ----------- |
+    | 1 |       10|     0.007 ms|
+    | 2 |      100|     0.048 ms|
+    | 3 |     1000|     0.471 ms|
+    | 4 |    10000|     4.582 ms|
+    | 5 |   100000|    50.087 ms|
+    | 6 |  1000000|   629.789 ms|
     
 ## BinaryTree: 二叉搜索树的各种方法, 最满意的是用海龟制图实现了简单二叉树的绘制
 - [Tree.py](BinaryTree/Tree.py): 二叉树的各种方法实现代码

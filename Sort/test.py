@@ -66,4 +66,6 @@ if __name__ == "__main__":
     from HeapSort import heap_sort
     from MergeSort import merge_sort
     from QuickSort import quick_sort
-    test_inplace(quick_sort)
+    from CountingSort import counting_sort
+    from RadixSort import radix_sort
+    test_inplace(radix_sort)
