@@ -24,7 +24,7 @@ testList_listNum_list = [100, 100, 100, 20, 2, 1]
 #             sorted_test_List.append(sorted_test_list)
 #     save_tuple = (test_List, sorted_test_List)
 
-#     with open(test_samples_path, 'wb') as f:
+#     with open(test_samples_path, 'wb') as f:-
 #         pickle.dump(save_tuple, f)
 
 
@@ -34,6 +34,7 @@ def test_inplace(sort_func):
     """
     with open(test_samples_path, 'rb') as f:
         test_List, sorted_test_List = pickle.load(f)
+    print(sort_func.__name__)
     for i in range(2):
         try:
             sort_func(test_List[i])
@@ -58,6 +59,7 @@ def test_inplace(sort_func):
         print("| {:1d} |{:9d}|{:10.3f} ms|".format(i+1, 10**(i+1), average_time))
         if average_time > 1000:
             break
+    print("\n")
         
 
 if __name__ == "__main__":
@@ -68,4 +70,10 @@ if __name__ == "__main__":
     from QuickSort import quick_sort
     from CountingSort import counting_sort
     from RadixSort import radix_sort
+    test_inplace(insert_sort)
+    test_inplace(bubble_sort)
+    test_inplace(heap_sort)
+    test_inplace(merge_sort)
+    test_inplace(quick_sort)
+    test_inplace(counting_sort)
     test_inplace(radix_sort)
