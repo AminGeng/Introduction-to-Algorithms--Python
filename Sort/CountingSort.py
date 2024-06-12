@@ -9,23 +9,23 @@
     新建一个等大列表L_N, 从后往前检索原列表(稳定性), 将该数放到它的实际排序位置处(L_N[L_K[i]++])
 """
 
-# k1, k2是整数, list_a中只出现[k1, k2]区间的整数
-def counting_sort(list_a):
-    if (len(list_a)<2): return
+# k1, k2是整数, list_x中只出现[k1, k2]区间的整数
+def counting_sort(list_x):
+    if (len(list_x)<2): return
     # list_b用来存放最后排好序的列表
-    k1 = min(list_a)
-    k2 = max(list_a)
+    x_min = min(list_x)
+    x_max = max(list_x)
 
-    list_b = list_a[:]  # 复制列表
+    list_x_ = list_x[:]  # 复制列表
     # 用来存放每个数和每个数该出现的最后位置
-    list_k = [0]*(k2-k1+1)
+    list_last_position = [0]*(x_max-x_min+1)
     # 记录每个元素出现的次数
-    for e in list_a:
-        list_k[e-k1] += 1
+    for e in list_x:
+        list_last_position[e-x_min] += 1
     # 计算每个元素出现的最后位置+1
-    for i in range(0, k2-k1):
-        list_k[i+1] += list_k[i]
-    for e in list_b[::-1]:
-        list_a[list_k[e-k1]-1] = e
-        list_k[e-k1] -= 1
+    for i in range(0, x_max-x_min):
+        list_last_position[i+1] += list_last_position[i]
+    for e in list_x_[::-1]:
+        list_x[list_last_position[e-x_min]-1] = e
+        list_last_position[e-x_min] -= 1
 
